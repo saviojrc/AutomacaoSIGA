@@ -36,6 +36,15 @@ public class WaintElement {
 			}
 		}
 	}
+	
+	public static void sleep(int segundos) {
+		try {
+			Thread.sleep(segundos*1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public void waintElementToBeClickable(String strProperty, String strValue) {
 		try {

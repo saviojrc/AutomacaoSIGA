@@ -3,8 +3,10 @@ package br.com.zup.TO;
 import java.io.Serializable;
 import java.util.Comparator;
 
-public class ProdutoTO implements Comparable<ProdutoTO>,Comparator<ProdutoTO>,Serializable {
-	
+import br.com.zup.pageObjects.enums.ProdutosPesquisaEnum;
+
+public class ProdutoTO implements Comparable<ProdutoTO>, Comparator<ProdutoTO>, Serializable {
+
 	/**
 	 * 
 	 */
@@ -12,7 +14,7 @@ public class ProdutoTO implements Comparable<ProdutoTO>,Comparator<ProdutoTO>,Se
 	/**
 	 * 
 	 */
-	
+
 	private Integer codigo;
 	private String descricao;
 	private String codigoBarras;
@@ -20,63 +22,77 @@ public class ProdutoTO implements Comparable<ProdutoTO>,Comparator<ProdutoTO>,Se
 	private Double peso;
 	private String modelo;
 	private Double preco;
+	private ProdutosPesquisaEnum descricaoNaPesquisa;
+	private ProdutosPesquisaEnum precoNaPesquisa;
+
 	public Integer getCodigo() {
 		return codigo;
 	}
+
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
+
 	public String getDescricao() {
 		return descricao;
 	}
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
 	public String getCodigoBarras() {
 		return codigoBarras;
 	}
+
 	public void setCodigoBarras(String codigoBarras) {
 		this.codigoBarras = codigoBarras;
 	}
+
 	public String getReferencia() {
 		return referencia;
 	}
+
 	public void setReferencia(String referencia) {
 		this.referencia = referencia;
 	}
+
 	public Double getPeso() {
 		return peso;
 	}
+
 	public void setPeso(Double peso) {
 		this.peso = peso;
 	}
+
 	public String getModelo() {
 		return modelo;
 	}
+
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
+
 	public Double getPreco() {
 		return preco;
 	}
+
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
-	
-	
+
 	@Override
 	public int compareTo(ProdutoTO o) {
-		if(this.codigo>o.codigo) {
+		if (this.codigo > o.codigo) {
 			return 1;
-		}else if(this.codigo<o.codigo) {
+		} else if (this.codigo < o.codigo) {
 			return 1;
-		}else {
+		} else {
 			return 0;
 		}
-		
+
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -85,6 +101,7 @@ public class ProdutoTO implements Comparable<ProdutoTO>,Comparator<ProdutoTO>,Se
 		result = prime * result + ((preco == null) ? 0 : preco.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -106,25 +123,33 @@ public class ProdutoTO implements Comparable<ProdutoTO>,Comparator<ProdutoTO>,Se
 			return false;
 		return true;
 	}
-	
-	
+
 	@Override
 	public int compare(ProdutoTO o1, ProdutoTO o2) {
-		if(o1.getPreco()>o2.getPreco()) {
+		if (o1.getPreco() > o2.getPreco()) {
 			return 1;
-		}else if(o1.getPreco()<o2.getPreco()) {
+		} else if (o1.getPreco() < o2.getPreco()) {
 			return -1;
-		}else {
+		} else {
 			return 0;
-		} 
+		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public ProdutosPesquisaEnum getDescricaoNaPesquisa() {
+		return descricaoNaPesquisa;
+	}
+
+	public void setDescricaoNaPesquisa(ProdutosPesquisaEnum descricaoNaPesquisa) {
+		this.descricaoNaPesquisa = descricaoNaPesquisa;
+	}
+
+	public ProdutosPesquisaEnum getPrecoNaPesquisa() {
+		return precoNaPesquisa;
+	}
+
+	public void setPrecoNaPesquisa(ProdutosPesquisaEnum precoNaPesquisa) {
+		this.precoNaPesquisa = precoNaPesquisa;
+	}
+
 
 }

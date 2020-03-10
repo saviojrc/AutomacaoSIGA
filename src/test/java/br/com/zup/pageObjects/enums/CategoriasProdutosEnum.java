@@ -19,14 +19,8 @@ public enum CategoriasProdutosEnum {
 	AUTOMOTIVO(".cssSelector","#collapse- > ul:nth-child(1) > li:nth-child(4) > a:nth-child(1)"),
 	CASA_E_CONSTRUCAO(".cssSelector","#collapse- > ul:nth-child(1) > li:nth-child(5) > a:nth-child(1)"),
 	ESPORTE_E_LAZER(".cssSelector","#collapse- > ul:nth-child(1) > li:nth-child(6) > a:nth-child(1)"),
-	AUDIO(".cssSelector","#collapse- > ul:nth-child(1) > li:nth-child(7) > a:nth-child(1)"),
-	NOTEBOOK(".cssSelector","#collapse-categorias > ul:nth-child(1) > li:nth-child(1) > a:nth-child(1)"),
-	COMPUTADORES_E_ALL_IN_ONE(".cssSelector","#collapse-categorias > ul:nth-child(1) > li:nth-child(2) > a:nth-child(1)"),
-	TABLET_IPAD(".cssSelector","#collapse-categorias > ul:nth-child(1) > li:nth-child(3) > a:nth-child(1)"),
-	APPLE(".cssSelector","#collapse-categorias > ul:nth-child(1) > li:nth-child(4) > a:nth-child(1)"),
-	SERVIDOR(".cssSelector","#collapse-categorias > ul:nth-child(1) > li:nth-child(5) > a:nth-child(1)"),
-	CHROMEBOOK(".cssSelector","#collapse-categorias > ul:nth-child(1) > li:nth-child(6) > a:nth-child(1)"),
-	WORKSTATION(".cssSelector","#collapse-categorias > ul:nth-child(1) > li:nth-child(7) > a:nth-child(1)");
+	AUDIO(".cssSelector","#collapse- > ul:nth-child(1) > li:nth-child(7) > a:nth-child(1)");
+	
 	
 	
 	

@@ -75,6 +75,21 @@ public class Tela extends WaintElement {
 			throw new IllegalArgumentException(e.getMessage());
 		}
 	}
+	
+	
+	public String getPropertyValue(String strProperty, String strValue) {
+		try {
+
+			By by = TipoDeElementoByEnum.getTipoDeElemento(strProperty, strValue);
+			WebElement objhtmlWebElement = getWebElement(by);
+
+			return objhtmlWebElement.getAttribute("value");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new IllegalArgumentException(e.getMessage());
+		}
+	}
 
 	public void clickObject(String strProperty, String strValue) {
 		try {
@@ -121,6 +136,21 @@ public class Tela extends WaintElement {
 			throw new IllegalArgumentException(e.getMessage());
 		}
 	}
+	
+	public void ClickDropDowm(String strProperty, String strValue, String valor) {
+		try {
+
+			By by = TipoDeElementoByEnum.getTipoDeElemento(strProperty, strValue);
+			WebElement objhtmlWebElement = getWebElement(by);
+
+			Select select = new Select(objhtmlWebElement);
+			select.selectByVisibleText(valor);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new IllegalArgumentException(e.getMessage());
+		}
+	}
 
 	public void setText(String strProperty, String strValue, String srtString) {
 		try {
@@ -156,22 +186,29 @@ public class Tela extends WaintElement {
 			By by = TipoDeElementoByEnum.getTipoDeElemento(strProperty, strValue);
 			WebElement objhtmlWebElement = getWebElement(by);
 
-			objhtmlWebElement.clear();
+			objhtmlWebElement.click();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new IllegalArgumentException(e.getMessage());
 		}
 	}
 	
-	public void TriggerEndKey()
+	public void triggerEndKey()
     {
         getDriver().switchTo().activeElement().sendKeys(Keys.END);
 
 
     }
 	
+	public void triggerHomeKey()
+    {
+        getDriver().switchTo().activeElement().sendKeys(Keys.HOME);
+
+
+    }
 	
-	public void TriggerDowmKey()
+	
+	public void triggerDowmKey()
     {
         getDriver().switchTo().activeElement().sendKeys(Keys.DOWN);
 

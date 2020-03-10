@@ -49,7 +49,7 @@ public enum FaixaPrecoEnum {
 		
 		for(FaixaPrecoEnum faixa : values()) {
 			if(validarFaixaPreco(valorProduto, faixa) ) {
-				 
+				return faixa;
 			}
 		}
 		

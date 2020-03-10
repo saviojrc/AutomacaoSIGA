@@ -27,7 +27,8 @@ public class VerificationPoint extends Assert {
 			currentValue = Utilitarios.VerificaObjetoValido(currentValue) ? currentValue.trim() : "";
 			expectedValue = Utilitarios.VerificaObjetoValido(expectedValue) ? expectedValue.trim() : "";
 			printValues(currentValue, expectedValue);
-			assertEquals(currentValue, expectedValue);
+			boolean  iguais = currentValue.trim().equalsIgnoreCase(expectedValue.trim());
+			assertEquals(true, iguais);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

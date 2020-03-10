@@ -8,15 +8,17 @@ import br.com.zup.pageObjects.enums.CategoriasProdutosEnum;
 import br.com.zup.pageObjects.enums.FaixaPrecoEnum;
 import br.com.zup.pageObjects.enums.FiltroPrecoEnum;
 import br.com.zup.pageObjects.enums.ProdutosPesquisaEnum;
+import br.com.zup.pageObjects.enums.SubCategoriasEnum;
 import br.com.zup.pageObjects.enums.TipoDeProdutoEnum;
 import br.com.zup.pages.framework.Tela;
 import br.com.zup.util.Constantes;
+import br.com.zup.util.Formatacao;
 
 public class FiltroProdutosPO extends Tela {
 
 	public void selecionarCategoria(CategoriasProdutosEnum categoria) {
 		try {
-
+			sleep(10);
 			waintPresenceOfElementLocated(categoria.getStrProperty(), categoria.getStrValue());
 			clickObject(categoria.getStrProperty(), categoria.getStrValue());
 
@@ -28,16 +30,30 @@ public class FiltroProdutosPO extends Tela {
 
 	}
 
+	public void selecionarSubCategoria(SubCategoriasEnum subCategoria) {
+		try {
+			sleep(10);
+			waintPresenceOfElementLocated(subCategoria.getStrProperty(), subCategoria.getStrValue());
+			clickObject(subCategoria.getStrProperty(), subCategoria.getStrValue());
+			sleep(10);
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			throw new IllegalArgumentException(e.getMessage());
+		}
+
+	}
+
 	public void ordenarProdutos(FiltroPrecoEnum filtroOrdenacao) {
 		try {
-
+			sleep(10);
 			String strProperty = ".cssSelector";
 			String strValue = "select.form-control-flat";
 			implicitlyWait(2);
 			waintPresenceOfElementLocated(strProperty, strValue);
 			waintVisibilityOfElementLocated(strProperty, strValue);
 			waintElementToBeClickable(strProperty, strValue);
-			TriggerDowmKey();
+			triggerDowmKey();
 			ClickDropDowmIndex(strProperty, strValue, filtroOrdenacao.getIndice());
 
 		} catch (Exception e) {
@@ -48,17 +64,16 @@ public class FiltroProdutosPO extends Tela {
 
 	public void selecionarTipoProduto(TipoDeProdutoEnum tipoDeProduto) {
 		try {
-
+			sleep(10);
 			String strProperty = tipoDeProduto.getStrProperty();
 			String strValue = tipoDeProduto.getStrValue();
 			implicitlyWait(2);
 			waintPresenceOfElementLocated(strProperty, strValue);
 			waintVisibilityOfElementLocated(strProperty, strValue);
 			waintElementToBeClickable(strProperty, strValue);
-			MoveToElementPage(strProperty, strValue);
-			TriggerDowmKey();
+			triggerDowmKey();
 			clickObject(strProperty, strValue);
-
+			sleep(10);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new IllegalArgumentException(e.getMessage());
@@ -67,16 +82,28 @@ public class FiltroProdutosPO extends Tela {
 
 	public void filtrarFaixaDePreco(FaixaPrecoEnum faixaPreco) {
 		try {
-
+			sleep(10);
 			String strProperty = faixaPreco.getStrProperty();
 			String strValue = faixaPreco.getStrValue();
-			implicitlyWait(2);
 			waintPresenceOfElementLocated(strProperty, strValue);
 			waintVisibilityOfElementLocated(strProperty, strValue);
 			waintElementToBeClickable(strProperty, strValue);
 			MoveToElementPage(strProperty, strValue);
-			TriggerDowmKey();
+			triggerDowmKey();
 			clickObject(strProperty, strValue);
+			sleep(10);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new IllegalArgumentException(e.getMessage());
+		}
+	}
+
+	public void selecionarProdutoPesquisado(ProdutoTO produto) {
+		try {
+			waintElementToBeClickable(produto.getDescricaoNaPesquisa().getStrProperty(),
+					produto.getDescricaoNaPesquisa().getStrValue());
+			
+			clickObject(produto.getDescricaoNaPesquisa().getStrProperty(), produto.getDescricaoNaPesquisa().getStrValue());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,7 +114,7 @@ public class FiltroProdutosPO extends Tela {
 	public List<ProdutoTO> obterListaProdutos() {
 		try {
 
-			List<ProdutoTO> produtos = new ArrayList<>();
+			List<ProdutoTO> produtos = new ArrayList<ProdutoTO>();
 			ProdutoTO produtoTO = new ProdutoTO();
 
 			int indice = 1;
@@ -98,6 +125,7 @@ public class FiltroProdutosPO extends Tela {
 
 				ProdutosPesquisaEnum descricao = ProdutosPesquisaEnum
 						.obterProdutosPesquisa(ProdutosPesquisaEnum.DESCRICAO, indice);
+
 				ProdutosPesquisaEnum preco = ProdutosPesquisaEnum.obterProdutosPesquisa(ProdutosPesquisaEnum.PRECO,
 						indice);
 
@@ -107,9 +135,9 @@ public class FiltroProdutosPO extends Tela {
 				objStrDescricao = getPropertyObject(descricao.getStrProperty(), descricao.getStrValue(), "innerText");
 				MoveToElementPage(preco.getStrProperty(), preco.getStrValue());
 				objStrPreco = getPropertyObject(preco.getStrProperty(), preco.getStrValue(), "innerText").trim()
-						.replace("R$", "").replace(".", "").replace(",", "").trim();
+						.replace("R$", "").trim();
 
-				Double objDoublePreco = Double.parseDouble(objStrPreco);
+				Double objDoublePreco = Formatacao.formatarMoedaStringParaDouble(objStrPreco);
 
 				produtoTO.setCodigo(i);
 				produtoTO.setDescricao(objStrDescricao.trim());
@@ -118,6 +146,8 @@ public class FiltroProdutosPO extends Tela {
 				produtoTO.setModelo("");
 				produtoTO.setPeso(0.00);
 				produtoTO.setReferencia("");
+				produtoTO.setDescricaoNaPesquisa(descricao);
+				produtoTO.setPrecoNaPesquisa(preco);
 
 				produtos.add(produtoTO);
 
